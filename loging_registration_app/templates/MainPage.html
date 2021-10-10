@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <title>MAIN PAGE</title>
+</head>
+
+<body>
+    <div class="container p-5 bg-light">
+        <div class="mb-5 bg-success text-white">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages: %}
+                        {% if category=='logout': %}
+                            <h3 class="p-3">{{message}}</h3>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+        <div class="container pt-4">
+            <div class="row">
+                <div class="col-4 p-4 mx-auto bg-dark text-light">
+                    <h1 style="color: rgb(0, 102, 255);">Register</h1>
+                    <form action="/Register" method="POST">
+                        <label for=" first_name" class="form-label">First Name:</label>
+                        <input class="form-control" id="first_name" type="text" name="first_name" minlength="3" required
+                            aria-required="true">
+                        <label for="last_name" class="form-label">Last Name:</label>
+                        <input class="form-control" id="last_name" type="text" name="last_name" minlength="3" required 
+                            aria-required="true">
+                        <label for="email" class="form-label">Email:</label>
+                        <input class="form-control" id="email" type="text" name="email" required aria-required="true">
+                        <label for="password" class="form-label">Password:</label>
+                        <input class="form-control" id="password" type="text" name="password" required
+                            aria-required="true">
+                        <label for="confirm_password" class="form-label">Confirm Password:</label>
+                        <input class="form-control" id="confirm_password" type="text" name="confirm_password" required
+                            aria-required="true">
+                        <input class="btn btn-primary mt-3" type="submit" value="Register">
+                    </form>
+                    <div class="mt-4">
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                            {% if messages %}
+                                {% for category, message in messages: %}
+                                    {% if category=='register_errors': %}
+                                        <p class="text-danger">{{message}}</p>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                    </div>
+                </div>
+                <div class="col-4 p-4 mx-auto  bg-dark text-light">
+                    <h1 style="color:green">Login</h1>
+                    <form action="/login" method="POST">
+                        <label for=" email" class="form-label">Email:</label>
+                        <input class="form-control" id=" email" type="text" name="email"
+                            required aria-required="true">
+                        <label for="password" class="form-label">Password:</label>
+                        <input class="form-control" id=" password" type="text" name="password" minlength="3" required 
+                            aria-required="true">
+                        <input class="btn btn-success mt-3" type="submit" value="Login">
+                    </form>
+                    <div class="mt-4">
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                            {% if messages %}
+                                {% for category, message in messages: %}
+                                    {% if category=='login_errors': %}
+                                        <p class="text-danger">{{message}}</p>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+
+</html>
